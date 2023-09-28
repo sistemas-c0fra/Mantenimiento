@@ -1,8 +1,8 @@
 import { Table, TextInput } from 'flowbite-react'
-import { map, result, upperCase } from 'lodash'
-import { Pagination } from '../Pagination'
+import { map, upperCase } from 'lodash'
+import { Pagination } from '../../Pagination'
 import { useState } from 'react'
-import { NUM_PAGINATION } from '../../Constants'
+import { NUM_PAGINATION } from '../../../Constants'
 import Select from 'react-select'
 
 export function TableMachine(props) {
@@ -36,12 +36,13 @@ export function TableMachine(props) {
     }
 
     if (!filters.area & !filters.maquina) {
+        console.log(maquinas)
         result = maquinas
     }
     else {
         result = maquinas
             .filter((item) => !filters.area || item.area_data.label.toLowerCase().includes(filters.area.toLocaleLowerCase()))
-            .filter((item) => !filters.maquina || item.maquina.toLowerCase().includes(filters.maquina.toLocaleLowerCase()))
+            .filter((item) => !filters.maquina || item.label.toLowerCase().includes(filters.maquina.toLocaleLowerCase()))
     }
 
     return (
@@ -49,7 +50,7 @@ export function TableMachine(props) {
             <div className='flex flex-row w-full justify-between'>
                 <Select
                     id='area'
-                    className='w-52'
+                    className='w-80'
                     options={areas}
                     onChange={(val) => handleFilterChange('area', val.label)}
                 />
@@ -57,7 +58,7 @@ export function TableMachine(props) {
                     id='maqui'
                     type='text'
                     onChange={(e) => handleFilterChange('maquina', e.target.value)}
-                    className='rounded-lg'
+                    className='rounded-lg w-80'
                     placeholder='Product Name'
                     value={filters.maquina}
                 />
@@ -73,11 +74,11 @@ export function TableMachine(props) {
                 </Table.Head>
                 <Table.Body>
                     {map(result?.slice(page, page + NUM_PAGINATION), (maquina) => (
-                        <Table.Row key={maquina.id_maquina}>
+                        <Table.Row key={maquina.value}>
                             <Table.Cell>{maquina.area_data.label}</Table.Cell>
                             <Table.Cell>{maquina.subarea_data.label}</Table.Cell>
                             <Table.Cell>{maquina.zona_data.label}</Table.Cell>
-                            <Table.Cell>{upperCase(maquina.maquina)}</Table.Cell>
+                            <Table.Cell>{upperCase(maquina.label)}</Table.Cell>
                             <Acciones maquina={maquina} updateMachine={update} deleteMachine={deletem} />
                         </Table.Row>
                     ))}

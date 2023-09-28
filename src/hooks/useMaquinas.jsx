@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { getMaquinasApi, addMaquinaApi, updateMaquinaApi, deleteMaquinaApi } from '../api/MaquinasApi'
+import { getMaquinasApi, addMaquinaApi, updateMaquinaApi, deleteMaquinaApi, getMaquiApi } from '../api/MaquinasApi'
 
 export function useMaquinas() {
 
@@ -10,6 +10,18 @@ export function useMaquinas() {
         try {
             setLoading(true)
             const response = await getMaquinasApi()
+            setMaquinas(response)
+            setLoading(false)
+        } catch (error) {
+            console.log(error)
+            setLoading(false)
+        }
+    }
+
+    const getMaqui = async () => {
+        try {
+            setLoading(true)
+            const response = await getMaquiApi()
             setMaquinas(response)
             setLoading(false)
         } catch (error) {
@@ -52,6 +64,7 @@ export function useMaquinas() {
         loading,
         maquinas,
         getMaquinas,
+        getMaqui,
         addMaquina,
         updateMaquina,
         deleteMaquina

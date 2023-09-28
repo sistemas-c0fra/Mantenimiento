@@ -5,13 +5,13 @@ export function TitleBar(props) {
 
     return (
         <div className='flex w-full justify-between items-center py-2'>
-            <span className='text-2xl'>
+            <span className='text-2xl font-semibold'>
                 {title}
             </span>
             <Button
                 onClick={press}
                 gradientMonochrome="success"
-                className='w-48'
+                className='w-80'
             >
                 Añadir
             </Button>

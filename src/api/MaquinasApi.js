@@ -11,6 +11,17 @@ export async function getMaquinasApi() {
     }
 }
 
+export async function getMaquiApi() {
+    try {
+        const url = `${URL}maquinas.php?maqui`
+        const response = await fetch(url)
+        const result = await response.json()
+        return result
+    } catch (error) {
+        console.warn(error)
+    }
+}
+
 export async function getAreasApi() {
     try {
         const url = `${URL}maquinas.php?areas`

@@ -1,14 +1,15 @@
-export function MachineIcon(props) {
+import * as React from "react"
+export const MachineIcon = (props) => (
     <svg
         xmlns="http://www.w3.org/2000/svg"
         xmlSpace="preserve"
         id="Layer_1"
-        width={100}
-        height={100}
+        width={150}
+        height={150}
         viewBox="0 0 512 512"
         {...props}
     >
-        {/* <style>{".st0{fill:#2b79c2}.st1{fill:#3b4652}"}</style> */}
+        <style>{".st0{fill:#2b79c2}.st1{fill:#3b4652}"}</style>
         <path
             d="M45.9 224.3h85v71h-85zM381.9 290.7h87.3V364h-87.3z"
             className="st1"
@@ -47,4 +48,5 @@ export function MachineIcon(props) {
             className="st1"
         />
     </svg>
-}
+)
+
