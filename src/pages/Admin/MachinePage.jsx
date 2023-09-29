@@ -36,9 +36,9 @@ export function MachinePage() {
     }
 
     const deleteMachine = async (data) => {
-        const result = window.confirm(`Borrar maquina: ${data.maquina}`)
+        const result = window.confirm(`Borrar maquina: ${data.label}`)
         if (result) {
-            await deleteMaquina(data.id_maquina)
+            await deleteMaquina(data.value)
             onRefresh()
         }
     }

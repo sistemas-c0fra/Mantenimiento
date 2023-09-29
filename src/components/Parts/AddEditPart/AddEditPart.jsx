@@ -3,6 +3,7 @@ import { Button, Label, TextInput } from 'flowbite-react'
 import { useFormik } from 'formik'
 import Select from 'react-select'
 import { useParts } from '../../../hooks'
+import * as Yup from 'yup'
 
 export function AddEditPart(props) {
     const { refresh, close, maquina, parte } = props
@@ -10,7 +11,7 @@ export function AddEditPart(props) {
 
     const formik = useFormik({
         initialValues: initialValues(parte),
-        // validationSchema: validationSchema(),
+        validationSchema: Yup.object(validationSchema()),
         validateOnChange: false,
         onSubmit: async (val) => {
             try {
@@ -34,6 +35,7 @@ export function AddEditPart(props) {
                     options={maquina}
                     value={formik.values.maquina}
                     onChange={(val) => formik.setFieldValue('maquina', val)}
+                    className={formik.errors.maquina ? 'border-2 rounded-lg border-red-500' : ''}
                 />
             </div>
             <div>
@@ -43,6 +45,7 @@ export function AddEditPart(props) {
                     id="parte"
                     value={formik.values.parte}
                     onChange={formik.handleChange}
+                    className={formik.errors.parte ? 'border-2 rounded-lg border-red-500' : ''}
                 />
             </div>
             <div>
@@ -72,5 +75,13 @@ function initialValues(data) {
         maquina: data?.maquina_data || '',
         parte: data?.parte || '',
         obs: data?.observacion || ''
+    }
+}
+
+function validationSchema() {
+    return {
+        maquina: Yup.object().required(),
+        parte: Yup.string().required(),
+        obs: Yup.string()
     }
 }
